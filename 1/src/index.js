@@ -10,16 +10,25 @@ const Statistiikka = ({statistiikka}) => {
   const sum = statistiikka.hyva + statistiikka.neutraali + statistiikka.huono;
   const average = number / sum;
   const positiivisia = statistiikka.hyva / sum;
-  return (
-    <div>
-      <h2>Statistiikka</h2>
-      <Statistic text="Hyvä" value={statistiikka.hyva}/>
-      <Statistic text="Neutraali" value={statistiikka.neutraali}/>
-      <Statistic text="Huono" value={statistiikka.huono}/>
-      <Statistic text="Keskiarvo" value={average.toFixed(2)}/>
-      <Statistic text="Positiivisia" value={(positiivisia*100).toFixed(2)}/>
-    </div>
-  )
+  if (statistiikka.hyva || statistiikka.neutraali || statistiikka.huono) {
+    return (
+      <div>
+        <h2>Statistiikka</h2>
+        <Statistic text="Hyvä" value={statistiikka.hyva}/>
+        <Statistic text="Neutraali" value={statistiikka.neutraali}/>
+        <Statistic text="Huono" value={statistiikka.huono}/>
+        <Statistic text="Keskiarvo" value={average.toFixed(2)}/>
+        <Statistic text="Positiivisia" value={(positiivisia*100).toFixed(2)}/>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h2>Statistiikka</h2>
+        <p>Ei yhtään palautetta annettu</p>
+      </div>
+    )
+  }
 }
 
 const Nappula =  ({ handleClick, text }) => (

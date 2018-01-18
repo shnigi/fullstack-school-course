@@ -47,16 +47,28 @@ class App extends React.Component {
     }
   }
 
-render() {
-  return (
-    <div>
-      <h1>Anna palautetta</h1>
-      <Nappula handleClick={() => this.setState({ hyva: this.state.hyva + 1 })} text="Hyvä"/>
-      <Nappula handleClick={() => this.setState({ neutraali: this.state.neutraali + 1 })} text="Neutraali"/>
-      <Nappula handleClick={() => this.setState({ huono: this.state.huono + 1 })} text="Huono"/>
-      <Statistiikka statistiikka={this.state}/>
-    </div>
-  )
+  setValue = (type) => {
+    return () => {
+      if (type === 'hyva') {
+        this.setState({ hyva: this.state.hyva + 1 })
+      } else if (type === 'neutraali') {
+        this.setState({ neutraali: this.state.neutraali + 1 })
+      } else if (type === 'huono') {
+        this.setState({ huono: this.state.huono + 1 })
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Anna palautetta</h1>
+        <Nappula handleClick={this.setValue('hyva')} text="Hyvä"/>
+        <Nappula handleClick={this.setValue('neutraali')} text="Neutraali"/>
+        <Nappula handleClick={this.setValue('huono')} text="Huono"/>
+        <Statistiikka statistiikka={this.state}/>
+      </div>
+    )
   }
 }
 

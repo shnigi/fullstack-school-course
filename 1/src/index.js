@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+const Statistic =  ({text, value}) => (
+  <p>{text}: {value}</p>
+)
 
 const Statistiikka = ({statistiikka}) => {
   const number = statistiikka.hyva - statistiikka.huono;
@@ -10,14 +13,20 @@ const Statistiikka = ({statistiikka}) => {
   return (
     <div>
       <h2>Statistiikka</h2>
-      <p>Hyvä: {statistiikka.hyva}</p>
-      <p>Neutraali: {statistiikka.neutraali}</p>
-      <p>Huono: {statistiikka.huono}</p>
-      <p>Keskiarvo: {average.toFixed(2)}</p>
-      <p>Positiivisia: {(positiivisia*100).toFixed(2)}%</p>
+      <Statistic text="Hyvä" value={statistiikka.hyva}/>
+      <Statistic text="Neutraali" value={statistiikka.neutraali}/>
+      <Statistic text="Huono" value={statistiikka.huono}/>
+      <Statistic text="Keskiarvo" value={average.toFixed(2)}/>
+      <Statistic text="Positiivisia" value={(positiivisia*100).toFixed(2)}/>
     </div>
   )
 }
+
+const Nappula =  ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 
 class App extends React.Component {
   constructor() {
@@ -33,9 +42,9 @@ render() {
   return (
     <div>
       <h1>Anna palautetta</h1>
-      <button onClick={() => this.setState({ hyva: this.state.hyva + 1 })}>Hyvä</button>
-      <button onClick={() => this.setState({ neutraali: this.state.neutraali + 1 })}>Neutraali</button>
-      <button onClick={() => this.setState({ huono: this.state.huono + 1 })}>Huono</button>
+      <Nappula handleClick={() => this.setState({ hyva: this.state.hyva + 1 })} text="Hyvä"/>
+      <Nappula handleClick={() => this.setState({ neutraali: this.state.neutraali + 1 })} text="Neutraali"/>
+      <Nappula handleClick={() => this.setState({ huono: this.state.huono + 1 })} text="Huono"/>
       <Statistiikka statistiikka={this.state}/>
     </div>
   )

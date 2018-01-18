@@ -2,7 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const Statistic =  ({text, value}) => (
-  <p>{text}: {value}</p>
+  <tr>
+    <td>
+      <p>{text}:</p>
+    </td>
+    <td>
+      <p>{value}</p>
+    </td>
+  </tr>
 )
 
 const Statistiikka = ({statistiikka}) => {
@@ -14,11 +21,15 @@ const Statistiikka = ({statistiikka}) => {
     return (
       <div>
         <h2>Statistiikka</h2>
-        <Statistic text="Hyvä" value={statistiikka.hyva}/>
-        <Statistic text="Neutraali" value={statistiikka.neutraali}/>
-        <Statistic text="Huono" value={statistiikka.huono}/>
-        <Statistic text="Keskiarvo" value={average.toFixed(2)}/>
-        <Statistic text="Positiivisia" value={(positiivisia*100).toFixed(2)}/>
+        <table>
+        <tbody>
+          <Statistic text="Hyvä" value={statistiikka.hyva}/>
+          <Statistic text="Neutraali" value={statistiikka.neutraali}/>
+          <Statistic text="Huono" value={statistiikka.huono}/>
+          <Statistic text="Keskiarvo" value={average.toFixed(2)}/>
+          <Statistic text="Positiivisia" value={(positiivisia*100).toFixed(2)}/>
+        </tbody>
+        </table>
       </div>
     )
   } else {

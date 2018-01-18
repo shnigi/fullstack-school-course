@@ -1,55 +1,39 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Otsikko = (props) => (
-    <h1>{props.kurssi.nimi}</h1>
-)
-
-const Osa = (props) => (
-    <p>{props.osa} {props.tehtavia}</p>
-)
-
-const Sisalto = (props) => (
+const Statistiikka = ({statistiikka}) => (
   <div>
-    <Osa osa={props.kurssi.osat[0].nimi} tehtavia={props.kurssi.osat[0].tehtavia}/>
-    <Osa osa={props.kurssi.osat[1].nimi} tehtavia={props.kurssi.osat[1].tehtavia}/>
-    <Osa osa={props.kurssi.osat[2].nimi} tehtavia={props.kurssi.osat[2].tehtavia}/>
+    <h2>Statistiikka</h2>
+    <p>Hyvä: {statistiikka.hyva}</p>
+    <p>Neutraali: {statistiikka.neutraali}</p>
+    <p>Huono: {statistiikka.huono}</p>
   </div>
 )
 
-const Yhteensa = (props) => (
-  <p>yhteensä {props.kurssi.osat[0].tehtavia + props.kurssi.osat[1].tehtavia + props.kurssi.osat[2].tehtavia} tehtävää</p>
-)
-
-const App = () => {
-  const kurssi = {
-    nimi: 'Half Stack -sovelluskehitys',
-    osat: [
-      {
-        nimi: 'Reactin perusteet',
-        tehtavia: 10
-      },
-      {
-        nimi: 'Tiedonvälitys propseilla',
-        tehtavia: 7
-      },
-      {
-        nimi: 'Komponenttien tila',
-        tehtavia: 14
-      }
-    ]
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      hyva: 0,
+      neutraali: 0,
+      huono: 0
+    }
   }
 
+render() {
   return (
     <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto kurssi={kurssi}/>
-      <Yhteensa kurssi={kurssi}/>
+      <h1>Anna palautetta</h1>
+      <button onClick={() => this.setState({ hyva: this.state.hyva + 1 })}>Hyvä</button>
+      <button onClick={() => this.setState({ neutraali: this.state.neutraali + 1 })}>Neutraali</button>
+      <button onClick={() => this.setState({ huono: this.state.huono + 1 })}>Huono</button>
+      <Statistiikka statistiikka={this.state}/>
     </div>
   )
+  }
 }
 
 ReactDOM.render(
-  <App />,
+  <App/>,
   document.getElementById('root')
 )

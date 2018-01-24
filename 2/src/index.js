@@ -9,13 +9,18 @@ class App extends React.Component {
         name: 'Niki Ahlskog',
         id: 1
       }],
-      newName: ''
+      newName: '',
+      phoneNumber: ''
     }
   }
 
   handleNewName = (event) => {
    this.setState({ newName: event.target.value })
  }
+
+ handleNewNumber = (event) => {
+   this.setState({ phoneNumber: event.target.value })
+  }
 
  checkIfNameExists = () => {
    const names = this.state.persons.map(person => person.name);
@@ -31,14 +36,16 @@ class App extends React.Component {
         name: this.state.newName,
         date: new Date().new,
         important: Math.random() > 0.5,
-        id: this.state.persons.length + 1
+        id: this.state.persons.length + 1,
+        phone: this.state.phoneNumber
       }
 
       const persons = this.state.persons.concat(nameObject)
 
       this.setState({
         persons,
-        newName: ''
+        newName: '',
+        phoneNumber: ''
       })
     } else {
       alert('Nimi on jo listalla!')
@@ -58,11 +65,18 @@ class App extends React.Component {
             />
           </div>
           <div>
+           numero:
+           <input
+             value={this.state.phoneNumber}
+             onChange={this.handleNewNumber}
+           />
+         </div>
+          <div>
             <button type="submit">lisää</button>
           </div>
         </form>
         <h2>Numerot</h2>
-        {this.state.persons.map(person => <p key={person.id}>{person.name}</p>)}
+        {this.state.persons.map(person => <p key={person.id}>{person.name} {person.phone}</p>)}
       </div>
     )
   }

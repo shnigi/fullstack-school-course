@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Otsikko from './components/Otsikko.js'
 import Sisalto from './components/Sisalto.js'
+import Yhteensa from './components/Yhteensa.js'
 
 const App = () => {
   const kurssi = {
@@ -26,6 +27,7 @@ const App = () => {
     <div>
       <Otsikko kurssi={kurssi} />
       <Sisalto kurssi={kurssi}/>
+      <Yhteensa kurssi={kurssi}/>
     </div>
   )
 }

@@ -17,21 +17,32 @@ class App extends React.Component {
    this.setState({ newName: event.target.value })
  }
 
+ checkIfNameExists = () => {
+   const names = this.state.persons.map(person => person.name);
+   if (names.includes(this.state.newName)) return false;
+   return true;
+ }
+
   addPerson = (event) => {
     event.preventDefault()
-    const nameObject = {
-      name: this.state.newName,
-      date: new Date().new,
-      important: Math.random() > 0.5,
-      id: this.state.persons.length + 1
+
+    if (this.checkIfNameExists()) {
+      const nameObject = {
+        name: this.state.newName,
+        date: new Date().new,
+        important: Math.random() > 0.5,
+        id: this.state.persons.length + 1
+      }
+
+      const persons = this.state.persons.concat(nameObject)
+
+      this.setState({
+        persons,
+        newName: ''
+      })
+    } else {
+      alert('Nimi on jo listalla!')
     }
-
-    const persons = this.state.persons.concat(nameObject)
-
-    this.setState({
-      persons,
-      newName: ''
-    })
   }
 
   render() {

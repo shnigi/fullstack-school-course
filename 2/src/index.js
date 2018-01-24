@@ -1,54 +1,62 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Kurssi from './components/Kurssi.js'
 
-const App = () => {
-  const kurssit = [
-      {
-        nimi: 'Half Stack -sovelluskehitys',
-        id: 1,
-        osat: [
-          {
-            nimi: 'Reactin perusteet',
-            tehtavia: 10,
-            id: 1
-          },
-          {
-            nimi: 'Tiedonvälitys propseilla',
-            tehtavia: 7,
-            id: 2
-          },
-          {
-            nimi: 'Komponenttien tila',
-            tehtavia: 14,
-            id: 3
-          }
-        ]
-      },
-      {
-        nimi: 'Node.js',
-        id: 2,
-        osat: [
-          {
-            nimi: 'Routing',
-            tehtavia: 3,
-            id: 1
-          },
-          {
-            nimi: 'Middlewaret',
-            tehtavia: 7,
-            id: 2
-          }
-        ]
-      }
-    ]
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      persons: [{
+        name: 'Niki Ahlskog',
+        id: 1
+      }],
+      newName: ''
+    }
+  }
 
-  return (
-    <div>
-      {kurssit.map(kurssi => <Kurssi key={kurssi.id} kurssit={kurssi} />)}
-    </div>
-  )
+  handleNewName = (event) => {
+   this.setState({ newName: event.target.value })
+ }
+
+  addPerson = (event) => {
+    event.preventDefault()
+    const nameObject = {
+      name: this.state.newName,
+      date: new Date().new,
+      important: Math.random() > 0.5,
+      id: this.state.persons.length + 1
+    }
+
+    const persons = this.state.persons.concat(nameObject)
+
+    this.setState({
+      persons,
+      newName: ''
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Puhelinluettelo</h2>
+        <form onSubmit={this.addPerson}>
+          <div>
+            nimi:
+            <input
+             value={this.state.newName}
+             onChange={this.handleNewName}
+            />
+          </div>
+          <div>
+            <button type="submit">lisää</button>
+          </div>
+        </form>
+        <h2>Numerot</h2>
+        {this.state.persons.map(person => <p key={person.id}>{person.name}</p>)}
+      </div>
+    )
+  }
 }
+
 
 ReactDOM.render(
   <App />,

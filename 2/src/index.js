@@ -5,7 +5,7 @@ import Sisalto from './components/Sisalto.js'
 import Yhteensa from './components/Yhteensa.js'
 
 const App = () => {
-  const kurssi = {
+  const kurssit = {
     nimi: 'Half Stack -sovelluskehitys',
     osat: [
       {
@@ -25,9 +25,9 @@ const App = () => {
 
   return (
     <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto kurssi={kurssi}/>
-      <Yhteensa kurssi={kurssi}/>
+      <Otsikko kurssit={kurssit} />
+      <Sisalto kurssit={kurssit}/>
+      <Yhteensa kurssit={kurssit}/>
     </div>
   )
 }

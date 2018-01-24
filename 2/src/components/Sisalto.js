@@ -1,11 +1,11 @@
 import React from 'react'
 import Osa from './Osa.js'
 
-const Sisalto = ({kurssi}) => (
+const Sisalto = ({kurssit}) => (
   <div>
-    <Osa osa={kurssi.osat[0].nimi} tehtavia={kurssi.osat[0].tehtavia}/>
-    <Osa osa={kurssi.osat[1].nimi} tehtavia={kurssi.osat[1].tehtavia}/>
-    <Osa osa={kurssi.osat[2].nimi} tehtavia={kurssi.osat[2].tehtavia}/>
+    <Osa osa={kurssit.osat[0].nimi} tehtavia={kurssit.osat[0].tehtavia}/>
+    <Osa osa={kurssit.osat[1].nimi} tehtavia={kurssit.osat[1].tehtavia}/>
+    <Osa osa={kurssit.osat[2].nimi} tehtavia={kurssit.osat[2].tehtavia}/>
   </div>
 )
 

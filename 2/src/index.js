@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Otsikko from './components/Otsikko.js'
-import Sisalto from './components/Sisalto.js'
-import Yhteensa from './components/Yhteensa.js'
+import Kurssi from './components/Kurssi.js'
 
 const App = () => {
   const kurssit = [
@@ -44,18 +42,6 @@ const App = () => {
         ]
       }
     ]
-
-  const Kurssi = ({ kurssit }) => {
-    return (
-      <div>
-        <h1>Opetusohjelma</h1>
-        <Otsikko kurssit={kurssit} />
-        <Sisalto kurssit={kurssit} />
-        <Yhteensa kurssit={kurssit} />
-      </div>
-    )
-  }
-
 
   return (
     <div>

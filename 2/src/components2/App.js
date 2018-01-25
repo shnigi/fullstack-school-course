@@ -1,7 +1,7 @@
 import React from 'react'
 import Rajaus from './Rajaus.js'
 import Lisaa from './Lisaa.js'
-import axios from 'axios'
+import dbService from '../services/db.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +16,8 @@ class App extends React.Component {
   }
 
   componentWillMount = () => {
-    axios.get('http://localhost:3001/persons')
+    dbService
+    .getAll()
     .then(response => {
       this.setState({filteredItems: response.data, persons: response.data})
     })
@@ -47,7 +48,8 @@ class App extends React.Component {
         number: this.state.phoneNumber
       }
 
-      axios.post('http://localhost:3001/persons', nameObject)
+      dbService
+      .create(nameObject)
       .then(response => {
         const persons = this.state.persons.concat(response.data)
         this.setState({

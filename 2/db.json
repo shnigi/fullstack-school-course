@@ -21,28 +21,10 @@
       "id": 4
     },
     {
-      "name": "essfe",
-      "important": false,
-      "number": "234",
+      "name": "asdasd",
+      "important": true,
+      "number": "123",
       "id": 5
-    },
-    {
-      "name": "niki",
-      "important": true,
-      "number": "234423",
-      "id": 6
-    },
-    {
-      "name": "sef",
-      "important": false,
-      "number": "2345",
-      "id": 7
-    },
-    {
-      "name": "sdfessefsef",
-      "important": true,
-      "number": "24324",
-      "id": 8
     }
   ]
 }

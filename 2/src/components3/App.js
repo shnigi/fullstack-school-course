@@ -34,6 +34,11 @@ class App extends React.Component {
      this.setState({search: event.target.value});
    }
 
+   openCountry = (country) => {
+     console.log(country);
+     this.setState({filteredItems: [country]});
+   }
+
   render() {
     if (this.state.filteredItems.length > 10) {
       return (
@@ -46,7 +51,10 @@ class App extends React.Component {
       return (
         <div>
           <Search country={this.state.country} filterList={this.filterList}/>
-          {this.state.filteredItems.map((country, i) => <p key={i}>{country.name}</p>)}
+          {this.state.filteredItems.map((country, i) =>
+            <p key={i}>{country.name}
+            <button onClick={() => this.openCountry(country)}>Open</button>
+            </p>)}
         </div>
       )
     } else if (this.state.filteredItems.length === 1) {

@@ -7,27 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-    {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
-    },
-    {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
-      "id": 3
-    },
-    {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
-      "id": 4
-    }],
+      persons: [],
       newName: '',
       phoneNumber: '',
       filter: '',
@@ -36,7 +16,10 @@ class App extends React.Component {
   }
 
   componentWillMount = () => {
-    this.setState({filteredItems: this.state.persons})
+    axios.get('http://localhost:3001/persons')
+    .then(response => {
+      this.setState({filteredItems: response.data, persons: response.data})
+    })
   }
 
   handleNewName = (event) => {
@@ -61,23 +44,20 @@ class App extends React.Component {
         name: this.state.newName,
         date: new Date().new,
         important: Math.random() > 0.5,
-        id: this.state.persons.length + 1,
         number: this.state.phoneNumber
       }
 
       axios.post('http://localhost:3001/persons', nameObject)
       .then(response => {
-        console.log(response)
+        const persons = this.state.persons.concat(response.data)
+        this.setState({
+          persons,
+          newName: '',
+          phoneNumber: '',
+          filteredItems: persons
+        })
       })
 
-      const persons = this.state.persons.concat(nameObject)
-
-      this.setState({
-        persons,
-        newName: '',
-        phoneNumber: '',
-        filteredItems: persons
-      })
     } else {
       alert('Nimi on jo listalla!')
     }

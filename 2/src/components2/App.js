@@ -1,4 +1,6 @@
 import React from 'react'
+import Rajaus from './Rajaus.js'
+import Lisaa from './Lisaa.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -83,34 +85,12 @@ class App extends React.Component {
       <div>
         <h2>Puhelinluettelo</h2>
 
-        <div>
-         Rajaa näytettäviä:
-         <input
-            value={this.state.filter}
-            onChange={this.filterList}
-           />
-        </div>
+        <Rajaus filter={this.state.filter} filterList={this.filterList} />
+
         <br />
 
-        <form onSubmit={this.addPerson}>
-          <div>
-            nimi:
-            <input
-             value={this.state.newName}
-             onChange={this.handleNewName}
-            />
-          </div>
-          <div>
-           numero:
-           <input
-             value={this.state.phoneNumber}
-             onChange={this.handleNewNumber}
-           />
-         </div>
-          <div>
-            <button type="submit">lisää</button>
-          </div>
-        </form>
+        <Lisaa submit={this.addPerson} newName={this.state.newName} handleName={this.handleNewName} phoneNumber={this.state.phoneNumber} handlePhone={this.handleNewNumber}/>
+
         <h2>Numerot</h2>
         {this.state.filteredItems.map(person => <p key={person.id}>{person.name} {person.phone}</p>)}
       </div>

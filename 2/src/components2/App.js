@@ -19,7 +19,7 @@ class App extends React.Component {
     dbService
     .getAll()
     .then(response => {
-      this.setState({filteredItems: response.data, persons: response.data})
+      this.setState({filteredItems: response, persons: response})
     })
   }
 
@@ -51,7 +51,7 @@ class App extends React.Component {
       dbService
       .create(nameObject)
       .then(response => {
-        const persons = this.state.persons.concat(response.data)
+        const persons = this.state.persons.concat(response)
         this.setState({
           persons,
           newName: '',

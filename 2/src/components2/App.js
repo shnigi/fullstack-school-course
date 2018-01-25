@@ -1,25 +1,33 @@
 import React from 'react'
 import Rajaus from './Rajaus.js'
 import Lisaa from './Lisaa.js'
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [{
-        name: 'Niki Ahlskog',
-        id: 1
-      },
-      {
-        name: 'Seppo Rajamäki',
-        id: 2,
-        phone: '345343452'
-      },
-      {
-        name: 'Hannu Karpo',
-        id: 3,
-        phone: '2352523523'
-      }],
+      persons: [
+    {
+      "name": "Arto Hellas",
+      "number": "040-123456",
+      "id": 1
+    },
+    {
+      "name": "Martti Tienari",
+      "number": "040-123456",
+      "id": 2
+    },
+    {
+      "name": "Arto Järvinen",
+      "number": "040-123456",
+      "id": 3
+    },
+    {
+      "name": "Lea Kutvonen",
+      "number": "040-123456",
+      "id": 4
+    }],
       newName: '',
       phoneNumber: '',
       filter: '',
@@ -54,8 +62,13 @@ class App extends React.Component {
         date: new Date().new,
         important: Math.random() > 0.5,
         id: this.state.persons.length + 1,
-        phone: this.state.phoneNumber
+        number: this.state.phoneNumber
       }
+
+      axios.post('http://localhost:3001/persons', nameObject)
+      .then(response => {
+        console.log(response)
+      })
 
       const persons = this.state.persons.concat(nameObject)
 
@@ -92,7 +105,7 @@ class App extends React.Component {
         <Lisaa submit={this.addPerson} newName={this.state.newName} handleName={this.handleNewName} phoneNumber={this.state.phoneNumber} handlePhone={this.handleNewNumber}/>
 
         <h2>Numerot</h2>
-        {this.state.filteredItems.map(person => <p key={person.id}>{person.name} {person.phone}</p>)}
+        {this.state.filteredItems.map(person => <p key={person.id}>{person.name} {person.number}</p>)}
       </div>
     )
   }

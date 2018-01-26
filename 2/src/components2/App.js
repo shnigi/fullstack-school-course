@@ -86,6 +86,12 @@ class App extends React.Component {
                 this.hideMessage();
               })
           })
+          .catch(error => {
+            console.log('fail')
+            this.setState({
+              successMessage: 'Varoitus, henkilöä ei löydy kannasta enää!',})
+            this.hideMessage();
+          })
       }
     }
   }

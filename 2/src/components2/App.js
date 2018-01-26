@@ -81,7 +81,9 @@ class App extends React.Component {
                   filteredItems: response,
                   persons: response,
                   phoneNumber: '',
-                  newName: ''})
+                  newName: '',
+                  successMessage: 'Päivitetty onnistuneesti!',})
+                this.hideMessage();
               })
           })
       }
@@ -111,7 +113,12 @@ class App extends React.Component {
         dbService
           .getAll()
           .then(response => {
-            this.setState({filteredItems: response, persons: response})
+            this.setState({
+              filteredItems: response,
+              persons: response,
+              successMessage: 'Poistettu onnistuneesti!'
+            })
+            this.hideMessage();
           })
       })
    }

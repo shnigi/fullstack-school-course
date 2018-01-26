@@ -13,7 +13,7 @@
     {
       "name": "niki",
       "important": true,
-      "number": "555555",
+      "number": "11111",
       "id": 4
     },
     {
@@ -27,12 +27,6 @@
       "important": false,
       "number": "214234234",
       "id": 6
-    },
-    {
-      "name": "jaska joku",
-      "important": false,
-      "number": "423432",
-      "id": 7
     }
   ]
 }

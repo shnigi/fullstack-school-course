@@ -8,3 +8,21 @@ body {
 .flag {
   max-width: 200px;
 }
+
+h2 {
+  color: green;
+}
+
+div {
+  padding:10px;
+}
+
+.error {
+  color: green;
+  background: lightgreen;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}

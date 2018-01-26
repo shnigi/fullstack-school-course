@@ -2,6 +2,8 @@ import React from 'react'
 import Rajaus from './Rajaus.js'
 import Lisaa from './Lisaa.js'
 import dbService from '../services/db.js'
+import '../index.css'
+import SuccessNotification from './Success.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +13,8 @@ class App extends React.Component {
       newName: '',
       phoneNumber: '',
       filter: '',
-      filteredItems: []
+      filteredItems: [],
+      successMessage: null
     }
   }
 
@@ -56,8 +59,10 @@ class App extends React.Component {
           persons,
           newName: '',
           phoneNumber: '',
-          filteredItems: persons
+          filteredItems: persons,
+          successMessage: 'Luotu onnistuneesti!',
         })
+        this.hideMessage();
       })
 
     } else {
@@ -81,6 +86,12 @@ class App extends React.Component {
           })
       }
     }
+  }
+
+  hideMessage = () => {
+    setTimeout(() => {
+       this.setState({successMessage: null})
+     }, 5000)
   }
 
   filterList = (event) => {
@@ -109,6 +120,8 @@ class App extends React.Component {
     return (
       <div>
         <h2>Puhelinluettelo</h2>
+
+        <SuccessNotification message={this.state.successMessage}/>
 
         <Rajaus filter={this.state.filter} filterList={this.filterList} />
 

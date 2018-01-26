@@ -61,7 +61,25 @@ class App extends React.Component {
       })
 
     } else {
-      alert('Nimi on jo listalla!')
+      if(window.confirm('Haluatko päivittää numeron?')) {
+        const names = this.state.persons.map(person => person.name);
+        const personObject = this.state.persons[names.indexOf(this.state.newName)];
+        const changedPerson = { ...personObject, number: this.state.phoneNumber }
+
+        dbService
+          .update(personObject.id, changedPerson)
+          .then(response => {
+            dbService
+              .getAll()
+              .then(response => {
+                this.setState({
+                  filteredItems: response,
+                  persons: response,
+                  phoneNumber: '',
+                  newName: ''})
+              })
+          })
+      }
     }
   }
 

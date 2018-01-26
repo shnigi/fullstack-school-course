@@ -9,6 +9,18 @@
       "name": "Arto Järvinen",
       "number": "040-123456",
       "id": 3
+    },
+    {
+      "name": "niki",
+      "important": true,
+      "number": "555555",
+      "id": 4
+    },
+    {
+      "name": "jaska jokunen",
+      "important": false,
+      "number": "2312442",
+      "id": 5
     }
   ]
 }

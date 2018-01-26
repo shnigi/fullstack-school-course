@@ -75,6 +75,18 @@ class App extends React.Component {
      this.setState({filter: event.target.value});
    }
 
+   deletePerson = (personId) => {
+     dbService
+      .remove(personId)
+      .then(response => {
+        dbService
+          .getAll()
+          .then(response => {
+            this.setState({filteredItems: response, persons: response})
+          })
+      })
+   }
+
   render() {
     return (
       <div>
@@ -85,9 +97,14 @@ class App extends React.Component {
         <br />
 
         <Lisaa submit={this.addPerson} newName={this.state.newName} handleName={this.handleNewName} phoneNumber={this.state.phoneNumber} handlePhone={this.handleNewNumber}/>
-
         <h2>Numerot</h2>
-        {this.state.filteredItems.map(person => <p key={person.id}>{person.name} {person.number}</p>)}
+        {this.state.filteredItems.map(person =>
+          <div key={person.id}>
+          {person.name}
+          {person.number}
+          <button onClick={() => this.deletePerson(person.id)}>Delete</button>
+          </div>
+        )}
       </div>
     )
   }

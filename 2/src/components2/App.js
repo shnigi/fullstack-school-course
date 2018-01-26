@@ -102,7 +102,7 @@ class App extends React.Component {
           <div key={person.id}>
           {person.name}
           {person.number}
-          <button onClick={() => this.deletePerson(person.id)}>Delete</button>
+          <button onClick={() => {if(window.confirm('Delete the item?')) {this.deletePerson(person.id)};}}>Delete</button>
           </div>
         )}
       </div>

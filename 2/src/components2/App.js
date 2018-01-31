@@ -54,7 +54,8 @@ class App extends React.Component {
       dbService
       .create(nameObject)
       .then(response => {
-        const persons = this.state.persons.concat(response)
+        console.log('response', response);
+        const persons = response;
         this.setState({
           persons,
           newName: '',

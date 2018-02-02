@@ -53,15 +53,17 @@ class App extends React.Component {
 
       dbService
       .create(nameObject)
-      .then(response => {
-        const persons = response;
-        this.setState({
-          persons,
-          newName: '',
-          phoneNumber: '',
-          filteredItems: persons,
-          successMessage: 'Luotu onnistuneesti!',
-        })
+      .then(() => {
+        dbService
+          .getAll()
+          .then(response => {
+            this.setState({
+              filteredItems: response,
+              persons: response,
+              successMessage: 'Luotu onnistuneesti!',
+              newName: '',
+              phoneNumber: '',})
+          })
         this.hideMessage();
       })
 

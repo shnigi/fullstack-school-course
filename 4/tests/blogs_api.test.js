@@ -32,22 +32,33 @@ beforeAll(async () => {
 })
 
 test('Blogs can be fetched', async () => {
-  // await api
-  //   .get('/api/blogs')
-  //   .expect(200)
-  //   .expect('Content-Type', /application\/json/)
   const response = await api
    .get('/api/blogs')
 
  expect(response.body.length).toBe(initialBlogs.length)
 })
 
-// test('New blog can be posted', async () => {
-//   await api
-//     .post('/api/blogs')
-//     .expect(200)
-//     .expect('Content-Type', /application\/json/)
-// })
+test('A new valid blog can be added ', async () => {
+  const newBlog = {
+    "title": "Uusi vastalisätty",
+    "author": "Niki",
+    "url": "kala.com",
+    "likes": 1,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+
+  const response = await api
+    .get('/api/blogs')
+
+  const contents = response.body.map(r => r.title)
+
+  expect(response.body.length).toBe(initialBlogs.length + 1)
+  expect(contents).toContain('Uusi vastalisätty')
+})
 
 afterAll(() => {
   server.close()

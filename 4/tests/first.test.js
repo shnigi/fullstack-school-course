@@ -81,3 +81,11 @@ describe('Most appeared', () => {
     expect(result).toEqual(blogs[3].author)
   })
 })
+
+describe('Most liked writer', () => {
+  test('Writer with most likes:', () => {
+    const result = listHelper.writerWithMostLikes(blogs).author
+    console.log(listHelper.writerWithMostLikes(blogs));
+    expect(result).toEqual(blogs[1].author)
+  })
+})

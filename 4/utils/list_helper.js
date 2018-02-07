@@ -12,8 +12,25 @@ const totalLikes = (blogs) => {
 
 const favoriteBlog = blogs => blogs.reduce((a, b) => a.likes > b.likes ? a : b);
 
+const mostBlogs = (blogs) => {
+  const appeared = [];
+  blogs.map(blog => {
+    const author = appeared.find((item) => item.author == blog.author);
+    if (author === undefined) {
+      appeared.push({
+        author: blog.author,
+        blogs: 1
+      })
+    } else {
+      author.blogs++;
+    }
+  })
+  return appeared.reduce((a, b) => a.blogs > b.blogs ? a : b);
+}
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs
 }

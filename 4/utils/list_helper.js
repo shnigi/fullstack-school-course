@@ -7,11 +7,13 @@ const totalLikes = (blogs) => {
   blogs.map(blog => {
     likes += blog.likes;
   })
-  console.log('LIKES', likes);
   return likes;
 }
 
+const favoriteBlog = blogs => blogs.reduce((a, b) => a.likes > b.likes ? a : b);
+
 module.exports = {
   dummy,
-  totalLikes
+  totalLikes,
+  favoriteBlog
 }

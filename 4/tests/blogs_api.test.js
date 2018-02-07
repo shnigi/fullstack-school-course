@@ -2,25 +2,7 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const api = supertest(app)
 const Blog = require('../models/model')
-
-const initialBlogs = [
-  {
-    "_id": "5a74d63f639c943b14e9da25",
-    "title": "Harry Portter",
-    "author": "Geijo",
-    "url": "google.com",
-    "likes": 4,
-    "__v": 0
-  },
-  {
-    "_id": "5a7adbe9e65bc32ff8ffb940",
-    "title": "Testikamaa",
-    "author": "Jokujambba",
-    "url": "test.com",
-    "likes": 2,
-    "__v": 0
-  }
-]
+const { initialBlogs, postAndGet } = require('./test_helper')
 
 beforeAll(async () => {
   await Blog.remove({})
@@ -45,13 +27,7 @@ test('A new valid blog can be added ', async () => {
     "likes": 1,
   }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(200)
-
-  const response = await api
-    .get('/api/blogs')
+  const response = await postAndGet(newBlog)
 
   const contents = response.body.map(r => r.title)
 
@@ -66,13 +42,7 @@ test('Blog post without likes get default value 0', async () => {
     "url": "jee.com",
   }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(200)
-
-  const response = await api
-    .get('/api/blogs')
+ const response = await postAndGet(newBlog)
 
   response.body.forEach(objekti =>
     expect(objekti).toHaveProperty('likes')

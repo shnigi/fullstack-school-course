@@ -32,6 +32,16 @@ const postAndGet = async(newBlog) => {
     .get('/api/blogs')
 }
 
+const deleteBlog = async(id) => {
+  console.log('ID', id);
+  await api
+  .del(`/api/blogs/${id}`)
+  .expect(204)
+
+  return response = await api
+    .get('/api/blogs')
+}
+
 module.exports = {
-  initialBlogs, postAndGet
+  initialBlogs, postAndGet, deleteBlog
 }

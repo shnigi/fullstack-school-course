@@ -2,7 +2,7 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const api = supertest(app)
 const Blog = require('../models/model')
-const { initialBlogs, postAndGet } = require('./test_helper')
+const { initialBlogs, postAndGet, deleteBlog } = require('./test_helper')
 
 beforeAll(async () => {
   await Blog.remove({})
@@ -47,6 +47,12 @@ test('Blog post without likes get default value 0', async () => {
   response.body.forEach(objekti =>
     expect(objekti).toHaveProperty('likes')
   )
+})
+
+test('Blogpost can be deleted ', async () => {
+  const id = '5a74d63f639c943b14e9da25'
+  const response = await deleteBlog(id)
+  expect(response.body).not.toContain('Harry Portter')
 })
 
 afterAll(() => {

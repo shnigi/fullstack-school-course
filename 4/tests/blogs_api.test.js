@@ -74,8 +74,9 @@ test('Blog post without likes get default value 0', async () => {
   const response = await api
     .get('/api/blogs')
 
-  const likes = response.body;
-  likes.forEach(objekti => expect(objekti).toHaveProperty('likes'))
+  response.body.forEach(objekti =>
+    expect(objekti).toHaveProperty('likes')
+  )
 })
 
 afterAll(() => {

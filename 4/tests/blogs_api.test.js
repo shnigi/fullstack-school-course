@@ -24,7 +24,6 @@ const initialBlogs = [
 
 beforeAll(async () => {
   await Blog.remove({})
-  console.log('cleared')
 
   const blogObjects = initialBlogs.map(blog => new Blog(blog))
   const promiseArray = blogObjects.map(blog => blog.save())

@@ -49,7 +49,7 @@ describe('when new user with existing name is created', async () => {
       password: 'salainen'
     }
 
-    await api
+    const result = await api
       .post('/api/users')
       .send(newUser)
       .expect(409)
@@ -57,6 +57,7 @@ describe('when new user with existing name is created', async () => {
 
     const usersAfterOperation = await usersInDb()
     expect(usersAfterOperation.length).toBe(usersBeforeOperation.length)
+    expect(result.body).toEqual({ error: 'Username is not unique or password is too short' })
   })
 })
 

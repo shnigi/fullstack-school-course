@@ -6,7 +6,8 @@ blogsRouter.get('/', (request, response) => {
   Blog
     .find({})
     .then(blogs => {
-      response.json(blogs)
+      console.log('blogs', blogs);
+      response.json(blogs.map(Blog.format))
     })
 })
 
@@ -25,7 +26,7 @@ blogsRouter.post('/', async (request, response) => {
       author: body.author,
       url: body.url,
       likes: body.likes === undefined ? 0 : body.likes,
-      user: user._id
+      userId: user._id
     })
 
     const savedBlog = await blog.save()

@@ -16,7 +16,7 @@ usersRouter.post('/', async (request, response) => {
 
       const savedUser = await user.save()
 
-      response.json(savedUser)
+      response.json(User.format(savedUser))
     })
   } catch (exception) {
     console.log(exception)
@@ -24,19 +24,10 @@ usersRouter.post('/', async (request, response) => {
   }
 })
 
-const formatUser = (user) => {
-  return {
-    id: user.id,
-    username: user.username,
-    name: user.name,
-    adult: user.adult
-  }
-}
-
 usersRouter.get('/', async (request, response) => {
   try {
     const users = await User.find({})
-    response.json(users.map(formatUser))
+    response.json(users.map(User.format))
   } catch (exception) {
     console.log(exception)
     response.status(500).json({ error: 'something went wrong...' })

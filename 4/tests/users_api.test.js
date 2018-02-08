@@ -33,6 +33,33 @@ describe('when there is initially one user at db', async () => {
   })
 })
 
+describe('when new user with existing name is created', async () => {
+  beforeAll(async () => {
+    await User.remove({})
+    const user = new User({ username: 'exists', password: 'sekret', name: 'lel' })
+    await user.save()
+  })
+
+  test('create should fail', async () => {
+    const usersBeforeOperation = await usersInDb()
+
+    const newUser = {
+      username: 'exists',
+      name: 'exists',
+      password: 'salainen'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(409)
+      .expect('Content-Type', /application\/json/)
+
+    const usersAfterOperation = await usersInDb()
+    expect(usersAfterOperation.length).toBe(usersBeforeOperation.length)
+  })
+})
+
 afterAll(() => {
   server.close()
 })

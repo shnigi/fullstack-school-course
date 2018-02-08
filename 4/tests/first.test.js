@@ -89,3 +89,7 @@ describe('Most liked writer', () => {
     expect(result).toEqual(blogs[1].author)
   })
 })
+
+afterAll(() => {
+  server.close()
+})

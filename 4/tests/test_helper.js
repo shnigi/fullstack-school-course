@@ -2,6 +2,7 @@ const Blog = require('../models/model')
 const supertest = require('supertest')
 const { app, server } = require('../index')
 const api = supertest(app)
+const User = require('../models/user')
 
 const initialBlogs = [
   {
@@ -21,6 +22,11 @@ const initialBlogs = [
     "__v": 0
   }
 ]
+
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users
+}
 
 const postAndGet = async(newBlog) => {
   await api
@@ -43,5 +49,9 @@ const deleteBlog = async(id) => {
 }
 
 module.exports = {
-  initialBlogs, postAndGet, deleteBlog
+  initialBlogs, postAndGet, deleteBlog, usersInDb
 }
+
+afterAll(() => {
+  server.close()
+})

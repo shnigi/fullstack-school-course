@@ -6,7 +6,6 @@ blogsRouter.get('/', (request, response) => {
   Blog
     .find({})
     .then(blogs => {
-      console.log('blogs', blogs);
       response.json(blogs.map(Blog.format))
     })
 })

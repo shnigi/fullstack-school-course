@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt-nodejs')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const Blog = require('../models/model')
 
 const userIsUnique = async (username) => {
   const response = await User.find({username})
@@ -37,7 +38,9 @@ usersRouter.post('/', async (request, response) => {
 
 usersRouter.get('/', async (request, response) => {
   try {
-    const users = await User.find({})
+    const users = await User
+     .find({})
+     .populate('blogs')
     response.json(users.map(User.format))
   } catch (exception) {
     console.log(exception)

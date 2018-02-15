@@ -7,7 +7,10 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      blogs: []
+      blogs: [],
+      username: '',
+      password: '',
+      user: null
     }
   }
 
@@ -40,44 +43,52 @@ class App extends React.Component {
     }
   }
 
-  const loginForm = () => (
-    <div>
-      <h2>Kirjaudu</h2>
-
-      <form onSubmit={this.login}>
-        <div>
-          käyttäjätunnus
-          <input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleLoginFieldChange}
-          />
-        </div>
-        <div>
-          salasana
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleLoginFieldChange}
-          />
-        </div>
-        <button type="submit">kirjaudu</button>
-      </form>
-    </div>
-  )
-
-
-
   render() {
-    return (
+    const loginForm = () => (
+      <div>
+        <h2>Kirjaudu</h2>
+
+        <form onSubmit={this.login}>
+          <div>
+            käyttäjätunnus
+            <input
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleLoginFieldChange}
+            />
+          </div>
+          <div>
+            salasana
+            <input
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleLoginFieldChange}
+            />
+          </div>
+          <button type="submit">kirjaudu</button>
+        </form>
+      </div>
+    )
+
+  const  blogs = () => (
       <div>
         <h2>blogs</h2>
+        <h3>Teretulemast blogisivul {this.state.user.username}</h3>
         {this.state.blogs.map(blog =>
           <Blog key={blog.id} blog={blog}/>
         )}
       </div>
+    )
+
+    return (
+      <div>
+        {this.state.user === null ?
+         loginForm() :
+         blogs()
+         }
+       </div>
     );
   }
 }

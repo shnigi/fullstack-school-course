@@ -19,6 +19,15 @@ class Blog extends React.Component {
     const update = await BlogService.update(blog.id, updatedBlog);
   }
 
+  remove = async (blog) => {
+    const token = this.props.user.token
+    if (window.confirm("Poista?") == true) {
+      const remove = await BlogService.remove(blog.id, token);
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const blogStyle = {
       paddingTop: 10,
@@ -46,6 +55,7 @@ class Blog extends React.Component {
           {this.props.blog.url}
           <br />
           <button onClick={() => this.like(this.props.blog)}>LIKE</button>
+          <button onClick={() => this.remove(this.props.blog)}>Delete</button>
         </div>
       </div>
     )

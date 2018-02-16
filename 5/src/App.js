@@ -106,7 +106,7 @@ class App extends React.Component {
         <h3>Teretulemast blogisivul {this.state.user.username}</h3>
         <button onClick={this.logout}>Kirjaudu ulos</button>
         {blogsInLikeOrder.map(blog =>
-          <Blog key={blog.id} blog={blog}/>
+          <Blog key={blog.id} blog={blog} user={this.state.user}/>
         )}
         <CreateBlog user={this.state.user}/>
       </div>

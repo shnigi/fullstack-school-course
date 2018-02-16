@@ -69,6 +69,8 @@ class App extends React.Component {
   }
 
   render() {
+    const blogsInLikeOrder = this.state.blogs.sort((a, b) => a.likes < b.likes)
+
     const loginForm = () => (
       <div>
         <h2>Kirjaudu</h2>
@@ -103,7 +105,7 @@ class App extends React.Component {
         <h2>blogs</h2>
         <h3>Teretulemast blogisivul {this.state.user.username}</h3>
         <button onClick={this.logout}>Kirjaudu ulos</button>
-        {this.state.blogs.map(blog =>
+        {blogsInLikeOrder.map(blog =>
           <Blog key={blog.id} blog={blog}/>
         )}
         <CreateBlog user={this.state.user}/>

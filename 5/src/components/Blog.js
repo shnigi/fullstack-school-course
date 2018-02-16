@@ -3,6 +3,7 @@ import BlogService from '../services/blogs.js'
 
 class Blog extends React.Component {
   constructor(props) {
+    console.log('PROPSIT', props);
     super(props)
     this.state = {
       visible: false
@@ -26,6 +27,13 @@ class Blog extends React.Component {
     } else {
       return false;
     }
+  }
+
+  showWhenUserOwn = (blog) => {
+    if (blog.user === this.props.user.userId) {
+      return { display: '' }
+    }
+    return {display: 'none'}
   }
 
   render() {
@@ -55,7 +63,7 @@ class Blog extends React.Component {
           {this.props.blog.url}
           <br />
           <button onClick={() => this.like(this.props.blog)}>LIKE</button>
-          <button onClick={() => this.remove(this.props.blog)}>Delete</button>
+          <button style={this.showWhenUserOwn(this.props.blog)} onClick={() => this.remove(this.props.blog)}>Delete</button>
         </div>
       </div>
     )

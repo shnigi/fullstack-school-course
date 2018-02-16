@@ -1,8 +1,9 @@
 import React from 'react'
+import BlogService from '../services/blogs.js'
+
 class Blog extends React.Component {
   constructor(props) {
     super(props)
-    console.log('props', props);
     this.state = {
       visible: false
     }
@@ -10,6 +11,12 @@ class Blog extends React.Component {
 
   toggleVisibility = () => {
     this.setState({visible: !this.state.visible})
+  }
+
+  like = async (blog) => {
+    const updatedBlog = {...blog}
+    updatedBlog.likes++
+    const update = await BlogService.update(blog.id, updatedBlog);
   }
 
   render() {
@@ -37,6 +44,8 @@ class Blog extends React.Component {
           {this.props.blog.title}
           <br />
           {this.props.blog.url}
+          <br />
+          <button onClick={() => this.like(this.props.blog)}>LIKE</button>
         </div>
       </div>
     )

@@ -29,12 +29,9 @@ class Blog extends React.Component {
     }
   }
 
-  showWhenUserOwn = (blog) => {
-    if (blog.user === this.props.user.userId) {
-      return { display: '' }
-    }
-    return {display: 'none'}
-  }
+  showWhenUserOwn = ({user}) => ({
+    display: user === this.props.user.userId ? '' : 'none'
+  })
 
   render() {
     const blogStyle = {

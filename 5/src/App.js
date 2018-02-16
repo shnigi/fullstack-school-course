@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import CreateBlog from './components/CreateBlog'
+import Notification from './components/Notification'
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class App extends React.Component {
       blogs: [],
       username: '',
       password: '',
-      user: null
+      user: null,
+      notification: null
     }
   }
 
@@ -39,16 +41,24 @@ class App extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
+      if (!user) {
+        this.setState({
+          notification: 'käyttäjätunnus tai salasana virheellinen',
+        })
+        setTimeout(() => {
+          this.setState({ notification: null })
+        }, 5000)
+      }
 
       window.localStorage.setItem('loggedInUser', JSON.stringify(user))
       blogService.setToken(user.token)
       this.setState({ username: '', password: '', user})
     } catch(exception) {
       this.setState({
-        error: 'käyttäjätunnus tai salasana virheellinen',
+        notification: 'käyttäjätunnus tai salasana virheellinen',
       })
       setTimeout(() => {
-        this.setState({ error: null })
+        this.setState({ notification: null })
       }, 5000)
     }
   }
@@ -62,6 +72,7 @@ class App extends React.Component {
     const loginForm = () => (
       <div>
         <h2>Kirjaudu</h2>
+        <Notification message={this.state.notification} color="error"/>
 
         <form onSubmit={this.login}>
           <div>

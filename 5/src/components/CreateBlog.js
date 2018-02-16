@@ -1,5 +1,7 @@
 import React from 'react'
 import blogService from '../services/blogs'
+import '../style.css'
+import Notification from './Notification'
 
 class CreateBlog extends React.Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class CreateBlog extends React.Component {
       author: '',
       url: '',
       likes: '',
-      user: this.props.user
+      user: this.props.user,
+      notification: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +24,7 @@ class CreateBlog extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleSubmit(event) {
+  handleSubmit (event) {
     const newBlog = {
       "title": this.state.title,
       "author": this.state.author,
@@ -29,13 +32,23 @@ class CreateBlog extends React.Component {
       "likes": this.state.likes,
   		"userId": this.props.user.userId
     }
-    blogService.create(newBlog)
+    const response = blogService.create(newBlog)
+    if (response) {
+      this.setState({
+        notification: `Uusi blogi "${newBlog.title}" lisätty onnistuneesti`,
+      })
+      setTimeout(() => {
+        this.setState({notification: null})
+      }, 5000)
+    }
     event.preventDefault();
   }
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
+      <Notification message={this.state.notification} color="success"/>
         <div>
           <h2>Lisää uusi blogi</h2>
           Title:
@@ -70,6 +83,7 @@ class CreateBlog extends React.Component {
            <input type="submit" value="Submit" />
         </div>
       </form>
+      </div>
     );
   }
 }

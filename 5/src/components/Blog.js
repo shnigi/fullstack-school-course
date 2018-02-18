@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 class Blog extends React.Component {
   constructor(props) {
-    console.log('PROPSIT', props);
     super(props)
     this.state = {
       visible: false

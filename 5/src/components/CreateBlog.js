@@ -2,9 +2,11 @@ import React from 'react'
 import blogService from '../services/blogs'
 import '../style.css'
 import Notification from './Notification'
+import PropTypes from 'prop-types'
 
 class CreateBlog extends React.Component {
   constructor(props) {
+    console.log('CREATEBLOG PROPOS', props);
     super(props);
 
     this.state = {
@@ -99,3 +101,7 @@ class CreateBlog extends React.Component {
 }
 
 export default CreateBlog
+
+CreateBlog.propTypes = {
+  user: PropTypes.object
+}

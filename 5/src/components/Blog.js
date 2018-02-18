@@ -1,5 +1,6 @@
 import React from 'react'
 import BlogService from '../services/blogs.js'
+import PropTypes from 'prop-types'
 
 class Blog extends React.Component {
   constructor(props) {
@@ -17,13 +18,13 @@ class Blog extends React.Component {
   like = async (blog) => {
     const updatedBlog = {...blog}
     updatedBlog.likes++
-    const update = await BlogService.update(blog.id, updatedBlog);
+    await BlogService.update(blog.id, updatedBlog);
   }
 
   remove = async (blog) => {
     const token = this.props.user.token
-    if (window.confirm("Poista?") == true) {
-      const remove = await BlogService.remove(blog.id, token);
+    if (window.confirm("Poista?") === true) {
+      await BlogService.remove(blog.id, token);
     } else {
       return false;
     }
@@ -69,28 +70,7 @@ class Blog extends React.Component {
 
 export default Blog
 
-// import React from 'react'
-// const Blog = ({blog}) => {
-//   console.log('blog', blog);
-//
-//   const ShowInfo = (blog) => {
-//     console.log('hello', blog);
-//     return (
-//       <div>
-//       {blog.id}
-//       {blog.author}
-//       {blog.likes}
-//       {blog.title}
-//       {blog.url}
-//       </div>
-//     )
-//   }
-//
-//   return (
-//   <div onClick={() => ShowInfo(blog)}>
-//     {blog.title} {blog.author}
-//     <ShowInfo/>
-//   </div>
-// )}
-//
-// export default Blog
+Blog.propTypes = {
+  user: PropTypes.object,
+  blog: PropTypes.object
+}

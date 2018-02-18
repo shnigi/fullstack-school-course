@@ -14,7 +14,7 @@ const user = {
   userId: 123123
 }
 
-describe.only('<Blog />', () => {
+describe('<Blog />', () => {
   it('after clicking name the details are not displayed', () => {
     const blogComponent = shallow(<Blog blog={blog} user={user}/>)
     // console.log('Component debug', blogComponent.debug())
@@ -28,7 +28,7 @@ describe.only('<Blog />', () => {
   it('after clicking the name, details are displayed', () => {
     const blogComponent = shallow(<Blog blog={blog} user={user}/>)
     const clickElement = blogComponent.find('.heading')
-    clickElement.simulate('click')
+    clickElement.at(0).simulate('click')
     const clickedElement = blogComponent.find('.blog-details')
 
     // console.log('WADDAFAK', clickedElement.debug())

@@ -1,43 +1,39 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import SimpleBlog from './SimpleBlog'
+import Blog from './Blog'
 
-describe.only('<SimpleBlog />', () => {
-  it('renders content', () => {
-    const blog = {
-      title: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
-      author: 'sneen',
-      likes: 4
-    }
+const blog = {
+  title: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
+  author: 'sneen',
+  likes: 4,
+  url: "google.com",
+  id: 123123,
+}
 
-    const blogComponent = shallow(<SimpleBlog blog={blog} />)
+const user = {
+  userId: 123123
+}
+
+describe.only('<Blog />', () => {
+  it('after clicking name the details are not displayed', () => {
+    const blogComponent = shallow(<Blog blog={blog} user={user}/>)
     // console.log('Component debug', blogComponent.debug())
-    const contentDiv = blogComponent.find('.content')
+    const contentDiv = blogComponent.find('.heading')
+    const blogDetails = blogComponent.find('.blog-details')
 
     expect(contentDiv.text()).toContain(blog.title, blog.author)
+    expect(blogDetails.getElement().props.style).toEqual({ display: 'none' })
   })
 
-  it('clicking the button calls event handler twice', () => {
-    const blog = {
-      title: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
-      author: 'sneen',
-      likes: 4
-    }
+  it('after clicking the name, details are displayed', () => {
+    const blogComponent = shallow(<Blog blog={blog} user={user}/>)
+    const clickElement = blogComponent.find('.heading')
+    clickElement.simulate('click')
+    const clickedElement = blogComponent.find('.blog-details')
 
-    const mockHandler = jest.fn()
+    // console.log('WADDAFAK', clickedElement.debug())
 
-    const blogComponent = shallow(
-      <SimpleBlog
-        blog={blog}
-        onClick={mockHandler}
-      />
-    )
-
-    const button = blogComponent.find('button')
-    button.simulate('click')
-    button.simulate('click')
-
-    expect(mockHandler.mock.calls.length).toBe(2)
+    expect(clickedElement.getElement().props.style).toEqual({ display: '' })
   })
 
 })

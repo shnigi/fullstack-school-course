@@ -1,26 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
+// import {createStore} from 'redux'
+// import counterReducer from './reducer'
 
-const counterReducer = (state = 0, action) => {
-  console.log('wat', action);
-  console.log('state', state);
-  switch (action.type) {
-    case 'GOOD':
-      return state + 1
-    case 'OK':
-      return state + 1
-    case 'BAD':
-      return state - 1
-    default:
-     return state
-  }
-}
-
-const store = createStore(counterReducer)
+// const store = createStore(counterReducer)
 
 const Statistiikka = () => {
-  const palautteita = store.getState()
+  const palautteita = 0
 
   if (palautteita === 0) {
     return (
@@ -38,7 +24,7 @@ const Statistiikka = () => {
         <tbody>
           <tr>
             <td>hyvä</td>
-            <td>{store.getState()}</td>
+            <td></td>
           </tr>
           <tr>
             <td>neutraali</td>
@@ -67,7 +53,7 @@ const Statistiikka = () => {
 class App extends React.Component {
   klik = (nappi) => () => {
     console.log('NAPPI', nappi);
-    store.dispatch({type: nappi});
+    // store.dispatch({type: nappi});
     // nappi => store.dispatch({ type: nappi})
   }
 
@@ -89,4 +75,4 @@ const renderApp = () => {
 }
 
 renderApp()
-store.subscribe(renderApp)
+// store.subscribe(renderApp)

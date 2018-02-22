@@ -101,7 +101,7 @@ class App extends React.Component {
     )
 
   const  blogs = () => (
-      <div>
+      <div className="blogList">
         <h2>blogs</h2>
         <h3>Teretulemast blogisivul {this.state.user.username}</h3>
         <button onClick={this.logout}>Kirjaudu ulos</button>

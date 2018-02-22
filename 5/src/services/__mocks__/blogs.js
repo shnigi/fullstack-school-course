@@ -28,7 +28,6 @@ const blogs = [
 ]
 
 const getAll = () => {
-  console.log('PASKAAAAAAAAAAAAAAAAAAAAAAAA');
   return Promise.resolve(blogs)
 }
 

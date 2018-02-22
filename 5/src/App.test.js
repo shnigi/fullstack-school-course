@@ -12,12 +12,14 @@ describe('<App />', () => {
   describe('when user is not logged', () => {
     beforeEach(() => {
       app = mount(<App />)
-      console.log('APPI', app);
     })
 
     it('only login form is rendered', () => {
       app.update()
-
+      const contentDiv = app.find('.blogList')
+      console.log('contentDiv', app.debug());
+      const length = contentDiv.length;
+      expect(length).toBe(0)
     })
   })
 

@@ -28,10 +28,8 @@ const reducer = (state = initialState, action) => {
           item
       )
     case 'ADD':
-    console.log('wat', state);
-    const newItem = asObject(action.anecdote);
-    const newState = state.concat(newItem);
-    console.log('newItem', newState);
+      const newItem = asObject(action.anecdote);
+      const newState = state.concat(newItem);
       return newState
     default:
       return state

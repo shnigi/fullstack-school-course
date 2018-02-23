@@ -27,6 +27,12 @@ const reducer = (state = initialState, action) => {
           {...item, votes: item.votes + 1} :
           item
       )
+    case 'ADD':
+    console.log('wat', state);
+    const newItem = asObject(action.anecdote);
+    const newState = state.concat(newItem);
+    console.log('newItem', newState);
+      return newState
     default:
       return state
   }

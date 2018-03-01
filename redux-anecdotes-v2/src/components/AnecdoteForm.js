@@ -1,6 +1,6 @@
 import React from 'react'
 import { anecDoteCreation } from '../reducers/anecdoteReducer'
-console.log(anecDoteCreation);
+
 class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()

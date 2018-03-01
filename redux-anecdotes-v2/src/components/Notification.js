@@ -9,7 +9,7 @@ class Notification extends React.Component {
     }
     return (
       <div style={style}>
-        render here notification...
+        wat
       </div>
     )
   }

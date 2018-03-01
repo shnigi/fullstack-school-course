@@ -1,13 +1,13 @@
 import React from 'react'
-
+import { anecDoteCreation } from '../reducers/anecdoteReducer'
+console.log(anecDoteCreation);
 class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
-    this.props.store.dispatch({
-      type: 'CREATE',
-      content
-    })
+    this.props.store.dispatch(
+      anecDoteCreation(content)
+    )
 
     e.target.anecdote.value = ''
   }

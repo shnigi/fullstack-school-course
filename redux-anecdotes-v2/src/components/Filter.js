@@ -1,8 +1,9 @@
 import React from 'react'
+import { filterChange } from '../reducers/filterReducer'
 
 class Filter extends React.Component {
   handleChange = (event) => {
-    console.log('event', event.target.value);
+    this.props.store.dispatch(filterChange(event.target.value))
   }
   render() {
     const style = {

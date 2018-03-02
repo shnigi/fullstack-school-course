@@ -2,11 +2,24 @@ import React from 'react'
 
 class AnecdoteList extends React.Component {
   render() {
-    const anecdotes = this.props.store.getState().anecDotes
+    const notesToShow = () => {
+       const { filter, anecDotes } = this.props.store.getState();
+       if (filter === '') {
+         return anecDotes
+       }
+       return anecDotes
+// TÄÄLLÄ KESKEN ASDASDSAD
+       // return filter === 'IMPORTANT'
+       //   ? notes.filter(note => note.important)
+       //   : notes.filter(note => !note.important)
+    }
+    // const { filter, anecDotes } = this.props.store.getState();
+    // console.log('WAT', filter);
+
     return (
       <div>
         <h2>Anecdotes</h2>
-        {anecdotes.sort((a, b) => b.votes - a.votes).map(anecdote =>
+        {notesToShow().sort((a, b) => b.votes - a.votes).map(anecdote =>
           (<div key={anecdote.id}>
             <div>
               {anecdote.content}

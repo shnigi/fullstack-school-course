@@ -2,6 +2,7 @@ import React from 'react'
 
 class AnecdoteList extends React.Component {
   render() {
+    console.log('WAT', this);
     const anecdotes = this.props.store.getState()
     return (
       <div>

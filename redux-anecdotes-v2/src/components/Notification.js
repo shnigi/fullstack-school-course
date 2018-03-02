@@ -7,6 +7,7 @@ class Notification extends React.Component {
       border: 'solid',
       padding: 10,
       borderWidth: 1,
+      display: notification ? 'block' : 'none'
     }
     return (
       <div style={style}>

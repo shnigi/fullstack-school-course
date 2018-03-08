@@ -7,14 +7,12 @@ class AnecdoteList extends React.Component {
        if (filter === '') {
          return anecDotes
        }
+       if (filter !== '') {
+         const regex = new RegExp(filter, 'i');
+         return anecDotes.filter(({content}) => content.match(regex));
+       }
        return anecDotes
-// TÄÄLLÄ KESKEN ASDASDSAD
-       // return filter === 'IMPORTANT'
-       //   ? notes.filter(note => note.important)
-       //   : notes.filter(note => !note.important)
     }
-    // const { filter, anecDotes } = this.props.store.getState();
-    // console.log('WAT', filter);
 
     return (
       <div>
